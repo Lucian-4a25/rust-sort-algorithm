@@ -1,6 +1,7 @@
 /**
  * basic bubble sort implementation
  */
+#[allow(dead_code)]
 pub fn sort<T>(arr: &mut Box<[T]>)
 where
     T: Ord + Copy,
@@ -24,6 +25,7 @@ where
     }
 }
 
+// TODO(me): maybe add more test case
 #[test]
 fn test_bubble() {
     use crate::random::generate_random_data;

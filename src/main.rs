@@ -1,4 +1,5 @@
 mod bubble;
+mod insertion;
 mod quick_sort;
 mod random;
 
