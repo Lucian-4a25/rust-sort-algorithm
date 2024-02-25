@@ -1,5 +1,5 @@
 /**
- * basic insertion sort implementation
+ * basic selection sort implementation
  */
 #[allow(dead_code)]
 pub fn sort<T>(arr: &mut Box<[T]>)
@@ -10,29 +10,27 @@ where
         return;
     }
 
-    for i in 1..arr.len() {
-        let v = arr[i];
-        let mut j = i - 1;
-        let mut overflow = false;
-        loop {
-            if v >= arr[j] {
-                break;
-            }
+    for i in 0..arr.len() - 1 {
+        let mut min_v = arr[i];
+        let mut min_idx = i;
 
-            arr[j + 1] = arr[j];
-            if j == 0 {
-                overflow = true;
-                break;
+        for j in i + 1..arr.len() {
+            if arr[j] < min_v {
+                min_v = arr[j];
+                min_idx = j;
             }
-            j -= 1;
         }
-        // Now, j is in its final position
-        arr[if overflow { 0 } else { j + 1 }] = v;
+
+        if min_idx != i {
+            let tmp = arr[i];
+            arr[i] = min_v;
+            arr[min_idx] = tmp;
+        }
     }
 }
 
 #[test]
-fn test_insertion_sort() {
+fn test_selection_sort() {
     use crate::random::generate_random_data;
     const TEST_N: usize = 100;
 
