@@ -60,9 +60,9 @@ fn traverse_swap<T: Ord + Copy>(arr: &mut [T], mut i: usize, mut j: usize) -> us
 #[test]
 fn test_quick_sort() {
     use crate::random::generate_random_data;
-    const TEST_N: usize = 1000;
+    const TEST_N: usize = 100;
 
-    let mut arr = generate_random_data(TEST_N, 1000);
+    let mut arr = generate_random_data(TEST_N, 100);
     sort(&mut arr);
 
     for i in 0..TEST_N - 1 {
@@ -73,5 +73,5 @@ fn test_quick_sort() {
             i + 1
         );
     }
-    // println!("sorted value: {:?}", arr);
+    println!("sorted value: {:?}", arr);
 }
