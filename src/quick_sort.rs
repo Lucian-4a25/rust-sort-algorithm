@@ -1,9 +1,8 @@
-use std::collections::VecDeque;
-
 /**
  * quick sort for arr
  */
-fn sort(arr: &mut [i32]) {
+#[allow(dead_code)]
+fn sort<T: Ord + Copy>(arr: &mut [T]) {
     let l = arr.len();
     if l == 0 {
         return;
@@ -16,7 +15,9 @@ fn sort(arr: &mut [i32]) {
             continue;
         }
         let i = traverse_swap(arr, s, e);
-        queue.push((s, i - 1));
+        if i > 0 {
+            queue.push((s, i - 1));
+        }
         queue.push((i + 1, e));
     }
 }
@@ -25,7 +26,7 @@ fn sort(arr: &mut [i32]) {
  * traverse and swap in array, choose i as min value at the begining
  * return split point
  */
-fn traverse_swap(arr: &mut [i32], mut i: usize, mut j: usize) -> usize {
+fn traverse_swap<T: Ord + Copy>(arr: &mut [T], mut i: usize, mut j: usize) -> usize {
     let pivot_v = arr[i];
     let mut slot = i;
     while i < j {
@@ -58,7 +59,19 @@ fn traverse_swap(arr: &mut [i32], mut i: usize, mut j: usize) -> usize {
 
 #[test]
 fn test_quick_sort() {
-    let mut arr = [1, 2, 3, 4, 5, 1, 5, 4, 3, 2, 1, 10, 9, 8, 7, 6];
+    use crate::random::generate_random_data;
+    const TEST_N: usize = 1000;
+
+    let mut arr = generate_random_data(TEST_N, 1000);
     sort(&mut arr);
-    println!("sorted value: {:?}", arr);
+
+    for i in 0..TEST_N - 1 {
+        assert!(
+            arr[i] <= arr[i + 1],
+            "the order is not correct for position: {} {}",
+            i,
+            i + 1
+        );
+    }
+    // println!("sorted value: {:?}", arr);
 }
