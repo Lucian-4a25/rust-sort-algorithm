@@ -1,6 +1,7 @@
 /**
  * Shell sort algorithem implementation (a upgraded version of insertion sort)
  */
+#[allow(dead_code)]
 pub fn sort<T>(arr: &mut Box<[T]>)
 where
     T: Ord + Copy,
